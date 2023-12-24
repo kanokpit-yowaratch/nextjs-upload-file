@@ -38,3 +38,7 @@ Upload app created by NextJS.
 
   ## Deploy on
   <a href="https://vercel.com/" target="blank">Vercel</a>
+
+  Live Demo: <a href="https://nextjs-upload-file-gules.vercel.app/" target="blank">nextjs-upload-file</a>
+  
+  But on Vercel platform you won't be able to upload files on there. The code in the custom server is ignored. <a href="https://github.com/vercel/next.js/discussions/12429">Read more</a>
