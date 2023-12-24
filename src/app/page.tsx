@@ -53,6 +53,7 @@ export default function Home() {
         method: 'POST',
         body: data
       })
+      console.log('API: ', res);
       if (!res.ok) throw new Error(await res.text())
 
       handleOpen();
