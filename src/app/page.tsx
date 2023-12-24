@@ -4,6 +4,7 @@ import { styled } from '@mui/material/styles';
 import { Button, Box, Modal, Typography } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import Folder from '@mui/icons-material/Folder';
+import NextImage from 'next/image'
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -65,7 +66,7 @@ export default function Home() {
     console.log(fileObject);
     if (fileObject) {
       const imgName = fileObject.name;
-      console.log(imgName);
+      // console.log(imgName);
 
       const reader = new FileReader();
       reader.readAsDataURL(fileObject);
@@ -115,19 +116,27 @@ export default function Home() {
           </Button>
 
           <Box sx={{ mt: 2, mb: 2 }}>
-            {previewAvatar ? (
-              <img
-                src={URL.createObjectURL(previewAvatar)}
-                alt=""
-                height={200}
-              />
-            ) : (
-              <img
-                src="./upload-placeholder.jpg"
-                alt=""
-                height={200}
-              />
-            )}
+            <div className='preview-image'>
+              {previewAvatar ? (
+                <NextImage
+                  src={URL.createObjectURL(previewAvatar)}
+                  fill
+                  style={{
+                    objectFit: 'cover',
+                  }}
+                  alt=""
+                />
+              ) : (
+                <NextImage
+                  src="/upload-placeholder.jpg"
+                  fill
+                  style={{
+                    objectFit: 'cover',
+                  }}
+                  alt=""
+                />
+              )}
+            </div>
           </Box>
 
           <Box>
@@ -153,7 +162,7 @@ export default function Home() {
             Upload successfully.
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Your file in ./uploads directory.
+            Your file in [root]/uploads directory.
           </Typography>
         </Box>
       </Modal>

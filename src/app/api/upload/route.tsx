@@ -1,9 +1,13 @@
 import { writeFile } from 'fs/promises'
 import { NextRequest, NextResponse } from 'next/server'
+import path from "path";
 
 export async function POST(request: NextRequest) {
     const data = await request.formData()
     const file: File | null = data.get('file') as unknown as File
+    const dirRelativeToPublicFolder = "uploads";
+    const dir = path.resolve("./", "", dirRelativeToPublicFolder);
+    // console.log(dir);
 
     if (!file) {
         return NextResponse.json({ success: false })
@@ -12,9 +16,8 @@ export async function POST(request: NextRequest) {
     const bytes = await file.arrayBuffer()
     const buffer = Buffer.from(bytes)
 
-    const path = `./uploads/${file.name}`
-    await writeFile(path, buffer)
-    console.log(`open ${path} to see the uploaded file`)
+    const filePath = `${dir}/${file.name}`
+    await writeFile(filePath, buffer)
 
     return NextResponse.json({ success: true })
 }
