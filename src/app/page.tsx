@@ -162,7 +162,7 @@ export default function Home() {
             Upload successfully.
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Your file in [root]/uploads directory.
+            Your file in [root]/public/uploads directory.
           </Typography>
         </Box>
       </Modal>

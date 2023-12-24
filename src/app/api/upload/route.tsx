@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
     const data = await request.formData()
     const file: File | null = data.get('file') as unknown as File
     const dirRelativeToPublicFolder = "uploads";
-    const dir = path.resolve("./", "", dirRelativeToPublicFolder);
+    const dir = path.resolve("./", "public", dirRelativeToPublicFolder);
     // console.log(dir);
 
     if (!file) {
