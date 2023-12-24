@@ -15,9 +15,9 @@ export async function POST(request: NextRequest) {
 
     const bytes = await file.arrayBuffer()
     const buffer = Buffer.from(bytes)
-    return NextResponse.json({ message: buffer })
 
-    // const filePath = `${dir}/${file.name}`
+    const filePath = `${dir}/${file.name}`
+    return NextResponse.json({ path: filePath })
     // await writeFile(filePath, buffer)
 
     // return NextResponse.json({ success: true })
