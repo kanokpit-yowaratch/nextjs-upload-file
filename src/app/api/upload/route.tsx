@@ -21,3 +21,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true })
 }
+
+export async function GET() {
+    return NextResponse.json({ url: '/api/upload', type: 'GET' })
+}
