@@ -7,14 +7,14 @@ export async function POST(request: NextRequest) {
     const file: File | null = data.get('file') as unknown as File
     const dirRelativeToPublicFolder = "uploads";
     const dir = path.resolve("./", "public", dirRelativeToPublicFolder);
-    console.log(dir);
+    // console.log(dir);
+
+    if (!file) {
+        return NextResponse.json({ success: false })
+    }
+
+    const bytes = await file.arrayBuffer()
     return NextResponse.json({ path: dir })
-
-    // if (!file) {
-    //     return NextResponse.json({ success: false })
-    // }
-
-    // const bytes = await file.arrayBuffer()
     // const buffer = Buffer.from(bytes)
 
     // const filePath = `${dir}/${file.name}`
