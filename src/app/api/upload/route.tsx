@@ -17,10 +17,9 @@ export async function POST(request: NextRequest) {
     const buffer = Buffer.from(bytes)
 
     const filePath = `${dir}/${file.name}`
-    return NextResponse.json({ path: filePath })
-    // await writeFile(filePath, buffer)
+    await writeFile(filePath, buffer)
 
-    // return NextResponse.json({ success: true })
+    return NextResponse.json({ success: true })
 }
 
 export async function GET() {
