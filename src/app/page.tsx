@@ -5,6 +5,7 @@ import { Button, Box, Modal, Typography } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import Folder from '@mui/icons-material/Folder';
 import NextImage from 'next/image'
+import axios from "axios"
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -46,28 +47,29 @@ export default function Home() {
     if (!file) return
 
     try {
-      const data = new FormData()
-      data.set('file', file)
+      const formData = new FormData()
+      formData.set('file', file)
+      const api = process.env.NEXT_PUBLIC_API;
 
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: data
-      })
-      console.log('API: ', res);
-      if (!res.ok) throw new Error(await res.text())
-
-      handleOpen();
-    } catch (e: any) {
+      await axios
+        .post(`${api}/upload`, formData)
+        .then((response) => {
+          console.log(response.data);
+          handleOpen();
+        })
+        .catch((error) => {
+          console.log("error: ", error);
+        });
+    } catch (e) {
       console.error(e)
     }
   }
 
   const onSelectFile = (event: any) => {
     const fileObject = event.target.files?.[0] || null;
-    console.log(fileObject);
+    // console.log(fileObject);
     if (fileObject) {
       const imgName = fileObject.name;
-      // console.log(imgName);
 
       const reader = new FileReader();
       reader.readAsDataURL(fileObject);
