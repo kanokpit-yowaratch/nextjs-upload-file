@@ -22,6 +22,14 @@ Upload app created by NextJS.
 
   `React` `TypeScript` `NextJS`
 
+## Environment configuration
+
+Create `.env` file and set variable
+
+```
+NEXT_PUBLIC_API=
+```
+
 
 ## Run app
   ```
