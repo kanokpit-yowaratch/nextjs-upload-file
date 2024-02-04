@@ -1,7 +1,26 @@
 .preview-image {
-  width: auto;
+  width: 100%;
   min-width: 100px;
   max-width: 400px;
   height: 200px;
   position: relative;
+}
+
+.upload-form {
+  max-width: 600px;
+  margin-left: auto;
+  box-sizing: border-box;
+  margin-right: auto;
+  display: block;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-bottom: 32px;
+}
+
+@media (max-width: 400px) {
+  .upload-form {
+    width: 100%;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
 }
