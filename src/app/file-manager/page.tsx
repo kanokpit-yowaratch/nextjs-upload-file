@@ -17,7 +17,7 @@ function FileManager() {
         axios
             .get(`${apiUser}/medias`)
             .then((response) => {
-                console.log(response.data);
+                // console.log(response.data);
                 setFileList(response.data);
             })
             .catch((error) => {
