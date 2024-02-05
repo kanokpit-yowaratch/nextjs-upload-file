@@ -63,7 +63,7 @@ function Upload() {
         await axios
             .post(`${api}/upload`, formData)
             .then((response) => {
-                console.log(response.data);
+                // console.log(response.data);
                 handleOpen();
                 setActive(false)
             })

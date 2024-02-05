@@ -17,10 +17,36 @@
   margin-bottom: 32px;
 }
 
+.menu-active {
+  background-color: #777777;
+}
+
+.menu-active:active {
+  background-color: #777777;
+  text-decoration: none;
+}
+
+.image-cover {
+  display: flex;
+  width: 100px !important;
+  height: 75px !important;
+}
+
+.image-cover a {
+  width: 99px !important;
+}
+
 @media (max-width: 400px) {
   .upload-form {
     width: 100%;
     padding-left: 24px;
     padding-right: 24px;
+  }
+}
+
+@media (min-device-width: 1025px) {
+  .menu-active:hover {
+    background-color: #777777;
+    text-decoration: none;
   }
 }
