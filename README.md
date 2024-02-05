@@ -23,8 +23,15 @@ Example of client-side file upload in Next.js
 ## Environment configuration
 Create `.env` file and set variable
 
-```
-NEXT_PUBLIC_API=
+```bash
+NEXT_PUBLIC_API="https://seer-of-human.com"
+NEXT_PUBLIC_HOST_NAME="seer-of-human.com"
+# NEXT_PUBLIC_PROTOCOL="https"
+NEXT_PUBLIC_PROTOCOL="http"
+
+# NEXT_PUBLIC_API="http://localhost:3000"
+# NEXT_PUBLIC_HOST_NAME="localhost"
+# NEXT_PUBLIC_PROTOCOL="http"
 ```
 
 ## Run app
@@ -40,11 +47,8 @@ NEXT_PUBLIC_API=
   npm start
   ```
 
-  ## Deploy on
-  <a href="https://vercel.com/" target="blank">Vercel</a>
-
-  Live Demo: <a href="https://nextjs-upload-file-gules.vercel.app/" target="blank">nextjs-upload-file</a>
+  ## Deploy on <a href="https://vercel.com/" target="blank">Vercel</a>
   
-  But on Vercel platform, API in this app (`api/apload`) won't be able to upload files on there. The code in the custom server is ignored. <a href="https://github.com/vercel/next.js/discussions/12429">Read more</a>
+  Live Demo: <a href="https://nextjs-upload-file-gules.vercel.app/" target="blank">nextjs-upload-file</a>
 
-  For other host can be upload files normally. Set in `.env` file.
+  API Repo that support this client is: https://github.com/kanokpit-yowaratch/nestjs-upload-api
