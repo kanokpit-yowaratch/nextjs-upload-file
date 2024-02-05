@@ -13,9 +13,9 @@ function FileManager() {
     const [fileList, setFileList] = useState([])
 
     const list = () => {
-        const apiUser = process.env.NEXT_PUBLIC_API;
+        const api = process.env.NEXT_PUBLIC_API;
         axios
-            .get(`${apiUser}/medias`)
+            .get(`${api}/medias`)
             .then((response) => {
                 // console.log(response.data);
                 setFileList(response.data);
@@ -31,17 +31,18 @@ function FileManager() {
     }, []);
 
     const deleteImage = (deleteUrl: string) => {
-        // axios
-        //     .get(deleteUrl)
-        //     .then((response) => {
-        //         list();
-        //     })
-        //     .catch((error) => {
-        //         console.log(error);
-        //         alert('Can not delete this image.')
-        //     });
-        window.open(deleteUrl, '_blank');
-        location.reload();
+        axios
+            .delete(deleteUrl)
+            .then((response) => {
+                // console.log(response.data);
+                const message = response?.data?.message || 'Delete successfully.'
+                alert(message);
+                list();
+            })
+            .catch((error) => {
+                console.log(error);
+                alert('Can not delete this image.')
+            });
     }
 
     return (
