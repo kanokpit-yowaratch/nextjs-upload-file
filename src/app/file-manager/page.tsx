@@ -30,9 +30,10 @@ function FileManager() {
         list();
     }, []);
 
-    const deleteImage = (deleteUrl: string) => {
+    const deleteImage = (fileName: string) => {
+        const api = process.env.NEXT_PUBLIC_API;
         axios
-            .delete(deleteUrl)
+            .delete(`${api}/delete/${fileName}`)
             .then((response) => {
                 // console.log(response.data);
                 const message = response?.data?.message || 'Delete successfully.'
@@ -64,7 +65,7 @@ function FileManager() {
                             </a>
                             <Grid sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: 0.5 }}>
                                 <Button variant="contained" size='small' sx={{ display: 'flex', gap: 0.5 }} disabled><EditOutlined />Edit</Button>
-                                <Button variant="contained" color="error" size='small' sx={{ display: 'flex', gap: 0.5 }} onClick={() => deleteImage(item.delete)}><DeleteOutlined />Delete</Button>
+                                <Button variant="contained" color="error" size='small' sx={{ display: 'flex', gap: 0.5 }} onClick={() => deleteImage(item.fileName)}><DeleteOutlined />Delete</Button>
                             </Grid>
                         </Box>
                     )
