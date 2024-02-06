@@ -24,11 +24,12 @@ Example of client-side file upload in Next.js
 Create `.env` file and set variable
 
 ```bash
+# host
 NEXT_PUBLIC_API="https://seer-of-human.com"
 NEXT_PUBLIC_HOST_NAME="seer-of-human.com"
-# NEXT_PUBLIC_PROTOCOL="https"
-NEXT_PUBLIC_PROTOCOL="http"
+NEXT_PUBLIC_PROTOCOL="https"
 
+# local
 # NEXT_PUBLIC_API="http://localhost:3000"
 # NEXT_PUBLIC_HOST_NAME="localhost"
 # NEXT_PUBLIC_PROTOCOL="http"
@@ -51,4 +52,5 @@ NEXT_PUBLIC_PROTOCOL="http"
   
   Live Demo: <a href="https://nextjs-upload-file-gules.vercel.app/" target="blank">nextjs-upload-file</a>
 
-  API Repo that support this client is: https://github.com/kanokpit-yowaratch/nestjs-upload-api
+  API Repo: https://github.com/kanokpit-yowaratch/nestjs-upload-api
+  API Demo: https://seer-of-human.com

@@ -11,9 +11,9 @@ import { Box, Grid } from '@mui/material';
 
 function FileManager() {
     const [fileList, setFileList] = useState([])
+    const api = process.env.NEXT_PUBLIC_API;
 
     const list = () => {
-        const api = process.env.NEXT_PUBLIC_API;
         axios
             .get(`${api}/medias`)
             .then((response) => {
@@ -31,7 +31,6 @@ function FileManager() {
     }, []);
 
     const deleteImage = (fileName: string) => {
-        const api = process.env.NEXT_PUBLIC_API;
         axios
             .delete(`${api}/delete/${fileName}`)
             .then((response) => {
@@ -50,11 +49,12 @@ function FileManager() {
         <main className='MuiContainer-root MuiContainer-maxWidthSm upload-form'>
             <Grid sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', flexWrap: 'wrap', gap: 1 }}>
                 {fileList.map((item: any) => {
+                    const filePath = `${api}${item.path}`
                     return (
                         <Box key={item.fileName} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 3 }}>
-                            <a href={item.url} target="_blank">
+                            <a href={filePath} target="_blank">
                                 <NextImage
-                                    src={item.url}
+                                    src={filePath}
                                     width={184}
                                     height={100}
                                     style={{
