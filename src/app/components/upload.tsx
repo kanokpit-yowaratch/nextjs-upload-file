@@ -1,35 +1,13 @@
 'use client'
 import { useState } from 'react'
 import { styled } from '@mui/material/styles';
-import { Button, Box, Modal, Typography, TextField, Grid } from '@mui/material';
+import { Button, Box, Modal, Typography, TextField, Grid, DialogActions } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import Folder from '@mui/icons-material/Folder';
 import NextImage from 'next/image'
 import axios from "axios"
-
-const VisuallyHiddenInput = styled('input')({
-    clip: 'rect(0 0 0 0)',
-    clipPath: 'inset(50%)',
-    height: 1,
-    overflow: 'hidden',
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    whiteSpace: 'nowrap',
-    width: 1,
-});
-
-const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
+import VisuallyHiddenInput from '../styles/visuallyHiddenInput';
+import Style from '../styles/style';
 
 function Upload() {
     const [file, setFile] = useState<File>()
@@ -64,7 +42,7 @@ function Upload() {
             .post(`${api}/upload`, formData)
             .then((response) => {
                 // console.log(response.data);
-                handleOpen();
+                handleOpen('Upload successfully.', `File name: ${response.data.file_name}`);
                 setActive(false)
             })
             .catch((error) => {
@@ -216,13 +194,16 @@ function Upload() {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={style}>
+                <Box sx={Style}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
                         {modalHeader}
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                         {modalContent}
                     </Typography>
+                    <DialogActions>
+                        <Button autoFocus onClick={handleClose}>Ok</Button>
+                    </DialogActions>
                 </Box>
             </Modal>
         </main>

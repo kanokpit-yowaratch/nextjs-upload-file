@@ -7,11 +7,16 @@ import {
     EditOutlined,
     DeleteOutlined
 } from "@mui/icons-material";
-import { Box, Grid } from '@mui/material';
+import { Box, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Modal, Typography } from '@mui/material';
+import Style from '../styles/style';
 
 function FileManager() {
     const [fileList, setFileList] = useState([])
+    const [fileName, setFileName] = useState('');
     const [api, setApi] = useState(process.env.NEXT_PUBLIC_API)
+    const [openConfirm, setOpenConfirm] = useState(false);
+    const [openSuccessModal, setOpenSuccessModal] = useState(false);
+    const [deleteMessage, setDeleteMessage] = useState('')
 
     const list = () => {
         axios
@@ -31,19 +36,33 @@ function FileManager() {
     }, []);
 
     const deleteImage = (fileName: string) => {
+        setOpenConfirm(true)
+        setFileName(fileName);
+    }
+
+    const handleOk = () => {
+        setOpenConfirm(false)
         axios
             .delete(`${api}/delete/${fileName}`)
             .then((response) => {
                 // console.log(response.data);
                 const message = response?.data?.message || 'Delete successfully.'
-                alert(message);
+                setDeleteMessage(message)
+                setOpenSuccessModal(true)
                 list();
             })
             .catch((error) => {
                 console.log(error);
                 alert('Can not delete this image.')
+            })
+            .finally(() => {
+                setFileName('');
             });
-    }
+    };
+
+    const handleClose = () => {
+        setOpenSuccessModal(false)
+    };
 
     return (
         <main className='MuiContainer-root MuiContainer-maxWidthSm upload-form'>
@@ -72,6 +91,35 @@ function FileManager() {
                     )
                 })}
             </Grid>
+
+            <Dialog
+                sx={{ '& .MuiDialog-paper': { width: '80%', maxHeight: 435 } }}
+                maxWidth="xs"
+                open={openConfirm}
+            >
+                <DialogTitle>Confirm delete</DialogTitle>
+                <DialogContent dividers>Do you want to delete this image?</DialogContent>
+                <DialogActions>
+                    <Button autoFocus onClick={() => setOpenConfirm(false)}>Cancel</Button>
+                    <Button onClick={handleOk}>Ok</Button>
+                </DialogActions>
+            </Dialog>
+
+            <Modal
+                open={openSuccessModal}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={Style}>
+                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                        {deleteMessage}
+                    </Typography>
+                    <DialogActions>
+                        <Button autoFocus onClick={handleClose}>Ok</Button>
+                    </DialogActions>
+                </Box>
+            </Modal>
         </main>
     )
 }

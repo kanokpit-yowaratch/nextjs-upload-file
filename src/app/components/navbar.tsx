@@ -2,7 +2,7 @@
 import React from 'react'
 import Link from '@mui/material/Link';
 import { Box, Button } from '@mui/material'
-import { Folder, ViewList } from '@mui/icons-material'
+import { Folder, Refresh, ViewList } from '@mui/icons-material'
 import { usePathname } from 'next/navigation'
 
 function Navbar() {
@@ -24,10 +24,17 @@ function Navbar() {
           sx={{ display: 'flex', gap: 1 }}
           href={pathname === '/' ? '#' : '/'}
           className={`${pathname === '/' ? 'menu-active' : ''}`}
-          color='secondary'
+          color='success'
           variant="contained"
           component={Link}>
           <Folder />Upload
+        </Button>
+        <Button
+          sx={{ display: 'flex', gap: 1 }}
+          color='primary'
+          variant="contained"
+          onClick={() => window.location.reload()}>
+          <Refresh />Refresh
         </Button>
       </Box>
     </main>
