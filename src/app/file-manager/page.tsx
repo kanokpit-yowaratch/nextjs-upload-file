@@ -11,7 +11,7 @@ import { Box, Grid } from '@mui/material';
 
 function FileManager() {
     const [fileList, setFileList] = useState([])
-    const api = process.env.NEXT_PUBLIC_API;
+    const [api, setApi] = useState(process.env.NEXT_PUBLIC_API)
 
     const list = () => {
         axios
@@ -61,6 +61,7 @@ function FileManager() {
                                         objectFit: 'cover',
                                     }}
                                     alt={item.fileName}
+                                    priority={true}
                                 />
                             </a>
                             <Grid sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: 0.5 }}>
