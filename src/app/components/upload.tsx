@@ -1,6 +1,5 @@
 'use client'
 import { useState } from 'react'
-import { styled } from '@mui/material/styles';
 import { Button, Box, Modal, Typography, TextField, Grid, DialogActions } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import Folder from '@mui/icons-material/Folder';
@@ -8,9 +7,12 @@ import NextImage from 'next/image'
 import axios from "axios"
 import VisuallyHiddenInput from '../styles/visuallyHiddenInput';
 import Style from '../styles/style';
+import { validateImage } from '../utils/common';
 
 function Upload() {
-    const [file, setFile] = useState<File>()
+    const [file, setFile] = useState<File>();
+    const [isValid, setIsValid] = useState<Boolean>(true);
+    const [message, setMessage] = useState<string>('');
     const [imageCode, setImageCode] = useState("")
     const [source, setSource] = useState("")
     const [previewAvatar, setPreviewAvatar] = useState<Blob | MediaSource | null>();
@@ -29,8 +31,18 @@ function Upload() {
     };
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        if (!file) return
+        e.preventDefault();
+        if (!file) {
+            setIsValid(false);
+            setMessage('Please select file.');
+            return;
+        }
+
+        if (!validateImage(file).valid) {
+            setIsValid(validateImage(file).valid);
+            setMessage(validateImage(file).message);
+            return;
+        }
 
         const formData = new FormData()
         formData.set('file', file)
@@ -41,8 +53,8 @@ function Upload() {
         await axios
             .post(`${api}/upload`, formData)
             .then((response) => {
-                // console.log(response.data);
-                handleOpen('Upload successfully.', `File name: ${response.data.file_name}`);
+                console.log(response.data);
+                handleOpen('Upload successfully.', `File name: ${response.data.filename}`);
                 setActive(false)
             })
             .catch((error) => {
@@ -66,8 +78,13 @@ function Upload() {
         const fileObject = event.target.files?.[0] || null;
         // console.log(fileObject);
         if (fileObject) {
-            const imgName = fileObject.name;
+            if (!validateImage(fileObject).valid) {
+                setIsValid(validateImage(fileObject).valid);
+                setMessage(validateImage(fileObject).message);
+                return;
+            }
 
+            const imgName = fileObject.name;
             const reader = new FileReader();
             reader.readAsDataURL(fileObject);
             reader.onloadend = () => {
@@ -142,6 +159,12 @@ function Upload() {
                             Browse file
                             <VisuallyHiddenInput type="file" />
                         </Button>
+                        {
+                            !isValid && (
+                                <div>{message}</div>
+                            )
+                        }
+                        <div></div>
                     </Box>
                     <Grid container spacing={2} sx={{ mb: 2 }}>
                         <Grid item key="image_code" md={4} sm={4} xs={12}>

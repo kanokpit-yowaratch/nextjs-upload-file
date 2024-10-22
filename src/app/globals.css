@@ -36,6 +36,11 @@
   width: 99px !important;
 }
 
+.small-text {
+  font-size: 0.55rem;
+  margin-bottom: 5px;
+}
+
 @media (max-width: 400px) {
   .upload-form {
     width: 100%;

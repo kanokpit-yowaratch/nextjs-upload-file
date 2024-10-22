@@ -7,7 +7,7 @@ import {
     EditOutlined,
     DeleteOutlined
 } from "@mui/icons-material";
-import { Box, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Modal, Typography } from '@mui/material';
+import { Box, Chip, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Modal, Typography } from '@mui/material';
 import Style from '../styles/style';
 
 function FileManager() {
@@ -22,7 +22,7 @@ function FileManager() {
         axios
             .get(`${api}/medias`)
             .then((response) => {
-                // console.log(response.data);
+                console.log(response.data);
                 setFileList(response.data);
             })
             .catch((error) => {
@@ -83,6 +83,7 @@ function FileManager() {
                                     priority={true}
                                 />
                             </a>
+                            <Chip className='small-text' label={`Code: ${item.imageCode}`} />
                             <Grid sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: 0.5 }}>
                                 <Button variant="contained" size='small' sx={{ display: 'flex', gap: 0.5 }} disabled><EditOutlined />Edit</Button>
                                 <Button variant="contained" color="error" size='small' sx={{ display: 'flex', gap: 0.5 }} onClick={() => deleteImage(item.fileName)}><DeleteOutlined />Delete</Button>
