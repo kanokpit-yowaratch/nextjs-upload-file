@@ -25,9 +25,14 @@ Create `.env` file and set variable
 
 ```bash
 # host
-NEXT_PUBLIC_API="https://seer-of-human.com"
-NEXT_PUBLIC_HOST_NAME="seer-of-human.com"
-NEXT_PUBLIC_PROTOCOL="https"
+NEXT_PUBLIC_API="http://54.255.239.151:5000"
+NEXT_PUBLIC_HOST_NAME="54.255.239.151"
+NEXT_PUBLIC_PROTOCOL="http"
+
+# host
+# NEXT_PUBLIC_API="https://seer-of-human.com"
+# NEXT_PUBLIC_HOST_NAME="seer-of-human.com"
+# NEXT_PUBLIC_PROTOCOL="https"
 
 # local
 # NEXT_PUBLIC_API="http://localhost:3000"
