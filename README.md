@@ -25,13 +25,10 @@ Create `.env` file and set variable
 
 ```bash
 # host
-NEXT_PUBLIC_API="http://54.255.239.151:5000"
-
-# host
-# NEXT_PUBLIC_API="https://seer-of-human.com"
+NEXT_PUBLIC_API="https://kanokpit.com"
 
 # local
-# NEXT_PUBLIC_API="http://localhost:3000"
+# NEXT_PUBLIC_API="http://localhost:4000"
 ```
 
 ## Run app
@@ -52,4 +49,4 @@ NEXT_PUBLIC_API="http://54.255.239.151:5000"
   Live Demo: <a href="https://nextjs-upload-file-gules.vercel.app/" target="blank">nextjs-upload-file</a>
 
   API Repo: https://github.com/kanokpit-yowaratch/nestjs-upload-api
-  API Demo: https://seer-of-human.com
+  API Demo: https://kanokpit.com

@@ -54,7 +54,7 @@ function Upload() {
             .post(`${api}/upload`, formData)
             .then((response) => {
                 console.log(response.data);
-                handleOpen('Upload successfully.', `File name: ${response.data.filename}`);
+                handleOpen('Upload successfully.', `File name: ${response?.data?.file_name || ''}`);
                 setActive(false)
             })
             .catch((error) => {
