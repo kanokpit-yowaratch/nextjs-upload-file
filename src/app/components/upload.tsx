@@ -14,7 +14,6 @@ function Upload() {
     const [isValid, setIsValid] = useState<Boolean>(true);
     const [message, setMessage] = useState<string>('');
     const [imageCode, setImageCode] = useState("")
-    const [source, setSource] = useState("")
     const [previewAvatar, setPreviewAvatar] = useState<Blob | MediaSource | null>();
     const [openSuccessModal, setOpenSuccessModal] = useState(false);
     const [modalHeader, setModalHeader] = useState("Upload successfully.");
@@ -47,7 +46,6 @@ function Upload() {
         const formData = new FormData()
         formData.set('file', file)
         formData.set('image_code', imageCode);
-        formData.set('source', source);
         const api = process.env.NEXT_PUBLIC_API;
 
         await axios
@@ -178,22 +176,6 @@ function Upload() {
                                 onChange={(e) => setImageCode(e.target.value)}
                                 variant="outlined"
                                 size='small'
-                                fullWidth />
-                        </Grid>
-                    </Grid>
-                    <Grid container spacing={2}>
-                        <Grid item md={4} sm={4} xs={12}>
-                            <span>Source:</span>
-                        </Grid>
-                        <Grid item md={8} sm={8} xs={12}>
-                            <TextField
-                                label="Source"
-                                placeholder="Source"
-                                disabled={!active}
-                                onChange={(e) => setSource(e.target.value)}
-                                variant="outlined"
-                                size='small'
-                                helperText="Specify the source of the image that it was uploaded from Who/organization/agency"
                                 fullWidth />
                         </Grid>
                     </Grid>
