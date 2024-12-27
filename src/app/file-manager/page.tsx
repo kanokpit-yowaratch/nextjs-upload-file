@@ -3,10 +3,7 @@ import React, { useEffect, useState } from 'react'
 import NextImage from 'next/image'
 import axios from 'axios'
 import Button from '@mui/material/Button';
-import {
-    EditOutlined,
-    DeleteOutlined
-} from "@mui/icons-material";
+import { DeleteOutlined } from "@mui/icons-material";
 import { Box, Chip, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Modal, Typography } from '@mui/material';
 import Style from '../styles/style';
 
@@ -85,7 +82,6 @@ function FileManager() {
                             </a>
                             <Chip className='small-text' label={`Code: ${item.imageCode}`} />
                             <Grid sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: 0.5 }}>
-                                <Button variant="contained" size='small' sx={{ display: 'flex', gap: 0.5 }} disabled><EditOutlined />Edit</Button>
                                 <Button variant="contained" color="error" size='small' sx={{ display: 'flex', gap: 0.5 }} onClick={() => deleteImage(item.fileName)}><DeleteOutlined />Delete</Button>
                             </Grid>
                         </Box>
